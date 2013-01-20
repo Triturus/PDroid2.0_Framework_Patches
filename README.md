@@ -5,7 +5,7 @@
 These are the patches for the official PDroid2.0 framework. The patches only contain the latest stable version. I'm currently looking for a way to distribute 'devel' patches which are for testing purpose only. If someone has good ideas, please get in touch with me.
 
 ### Apply The Patches
-I'm also looking forward for an better way how to apply the patches. Until now I handle it the same way like mateor, so you can use this commands:
+I'm also looking forward for a better way how to apply the patches. Until now I handle it the same way like mateor, so you can use this commands:
 	
     cd ~/android/system; repo sync -j16 -f
 	cd ~/android/system/build; git checkout -b pdroid; patch -p1 < ~/JB_build.patch
@@ -17,7 +17,7 @@ I'm also looking forward for an better way how to apply the patches. Until now I
     brunch <YOUR_DEVICE>
 
 ### Remove The Patches
-You can remove the Patches with following commands (also same way like mateo handles it):
+You can remove the Patches with following commands (also same way like mateor handles it):
 
 	cd ~/android/system/build; git checkout . ; git clean -df
 	cd ~/android/system/libcore; git checkout . ; git clean -df
@@ -29,6 +29,7 @@ You can remove the Patches with following commands (also same way like mateo han
 Now only clean your target directory:
 
 	cd ~/android/system; make clobber ; make clean
+    
 ### Easier Way?
 If you aren't able to compile by your own, please choose [AutoPatcher](http://forum.xda-developers.com/showthread.php?t=1719408) to apply the patch to your current ROM.
 
