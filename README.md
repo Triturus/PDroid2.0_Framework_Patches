@@ -18,6 +18,7 @@ I'm also looking forward for an better way how to apply the patches. Until now y
     brunch <YOUR_DEVICE>
     
 Please note that the Patch **JB_frameworks_opt.patch** does not exists for CM10. Now you need to add the privacy Image to your sources. Go to directory: *yourdir/device/your_manufacturer(e.g.samsung)/your_device_model/your_device.mk* and add following to the mk file:
+
     # Secure Fake Image
     PRODUCT_COPY_FILES += \
     privacy/PDroid.jpeg:system/media/PDroid.jpeg
