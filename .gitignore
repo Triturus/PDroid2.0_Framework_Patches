@@ -1,0 +1,22 @@
+# some parts
+*~
+*.java.orig~
+*.java.orig
+*.java~
+*.orig~
+*.patch~
+*.patch
+*.diff
+*.diff~
+*.xml.orig
+*.xml.orig~
+*.txt
+*.txt~
+*.svn
+*.rej
+*.rej~
+*.aidl~
+*.mk~
+*classes~
+*.orig
+*.orig~
