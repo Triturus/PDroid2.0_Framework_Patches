@@ -1,0 +1,80 @@
+diff -rupN '--exclude=.svn' '--exclude=.git*' '--exclude=*.java~' '--exclude=*.mk~' '--exclude=*.orig~' '--exclude=*.txt' '--exclude=*.orig' '--exclude=*.rej' '--exclude=*.latest' '--exclude=*.txt~' '--exclude=*.xml~' '--exclude=*xml.orig~' '--exclude=*.xml.orig' '--exclude=*.patch~' '--exclude=*.patch' '--exclude=*.diff~' '--exclude=*.diff~' '--exclude=*.aidl~' '--exclude=*.xml~' '--exclude=*.latest' '--exclude=*.latest~' '--exclude=*~' /media/ROM-Speicher/CM10.1/build/core/pathmap.mk pang/build/core/pathmap.mk
+--- /media/ROM-Speicher/CM10.1/build/core/pathmap.mk	2013-04-02 21:33:47.704221108 +0545
++++ pang/build/core/pathmap.mk	2013-05-03 21:49:34.303696789 +0545
+@@ -81,6 +81,7 @@ JNI_H_INCLUDE := $(call include-path-for
+ # is so common and the other framework libraries can have mutual
+ # interdependencies.
+ #
++# BEGIN privacy-added: privacy
+ FRAMEWORKS_BASE_SUBDIRS := \
+ 	$(addsuffix /java, \
+ 	    core \
+@@ -92,6 +93,7 @@ FRAMEWORKS_BASE_SUBDIRS := \
+ 	    media/mca/filterpacks \
+ 	    drm \
+ 	    opengl \
++	    privacy \
+ 	    sax \
+ 	    telephony \
+ 	    wifi \
+@@ -100,6 +102,7 @@ FRAMEWORKS_BASE_SUBDIRS := \
+ 	    voip \
+ 	    fmradio \
+ 	 )
++# END privacy-added: privacy
+ 
+ #
+ # A version of FRAMEWORKS_BASE_SUBDIRS that is expanded to full paths from
+diff -rupN '--exclude=.svn' '--exclude=.git*' '--exclude=*.java~' '--exclude=*.mk~' '--exclude=*.orig~' '--exclude=*.txt' '--exclude=*.orig' '--exclude=*.rej' '--exclude=*.latest' '--exclude=*.txt~' '--exclude=*.xml~' '--exclude=*xml.orig~' '--exclude=*.xml.orig' '--exclude=*.patch~' '--exclude=*.patch' '--exclude=*.diff~' '--exclude=*.diff~' '--exclude=*.aidl~' '--exclude=*.xml~' '--exclude=*.latest' '--exclude=*.latest~' '--exclude=*~' /media/ROM-Speicher/CM10.1/build/target/product/core.mk pang/build/target/product/core.mk
+--- /media/ROM-Speicher/CM10.1/build/target/product/core.mk	2013-04-02 21:33:47.704221108 +0545
++++ pang/build/target/product/core.mk	2013-05-03 21:51:12.121532437 +0545
+@@ -18,6 +18,7 @@ PRODUCT_BRAND := generic
+ PRODUCT_DEVICE := generic
+ PRODUCT_NAME := core
+ 
++# BEGIN privacy-added: PDroid
+ PRODUCT_PACKAGES += \
+     ApplicationsProvider \
+     BackupRestoreConfirmation \
+@@ -51,6 +52,8 @@ PRODUCT_PACKAGES += \
+     core-junit \
+     dalvikvm \
+     dexdeps \
++    PDroidAgent \
++    PDroid \
+     dexdump \
+     dexlist \
+     dexopt \
+@@ -130,6 +133,8 @@ PRODUCT_PACKAGES += \
+     zoneinfo.idx \
+     zoneinfo.version
+ 
++# END privacy-added: PDroid
++
+ PRODUCT_COPY_FILES += \
+     system/core/rootdir/init.usb.rc:root/init.usb.rc \
+     system/core/rootdir/init.trace.rc:root/init.trace.rc \
+diff -rupN '--exclude=.svn' '--exclude=.git*' '--exclude=*.java~' '--exclude=*.mk~' '--exclude=*.orig~' '--exclude=*.txt' '--exclude=*.orig' '--exclude=*.rej' '--exclude=*.latest' '--exclude=*.txt~' '--exclude=*.xml~' '--exclude=*xml.orig~' '--exclude=*.xml.orig' '--exclude=*.patch~' '--exclude=*.patch' '--exclude=*.diff~' '--exclude=*.diff~' '--exclude=*.aidl~' '--exclude=*.xml~' '--exclude=*.latest' '--exclude=*.latest~' '--exclude=*~' /media/ROM-Speicher/CM10.1/build/target/product/security/privacy.x509.pem pang/build/target/product/security/privacy.x509.pem
+--- /media/ROM-Speicher/CM10.1/build/target/product/security/privacy.x509.pem	1970-01-01 05:30:00.000000000 +0530
++++ pang/build/target/product/security/privacy.x509.pem	2013-01-16 01:11:25.011694298 +0545
+@@ -0,0 +1,20 @@
++-----BEGIN CERTIFICATE-----
++MIIDNDCCAhwCCQCXWkdOAj3rWTANBgkqhkiG9w0BAQUFADBcMQswCQYDVQQGEwJE
++RTETMBEGA1UECBMKU29tZS1TdGF0ZTEhMB8GA1UEChMYSW50ZXJuZXQgV2lkZ2l0
++cyBQdHkgTHRkMRUwEwYDVQQDEwxTdnlhdG9zbGF2IEgwHhcNMTEwNzE0MjEyNTI2
++WhcNMzgxMTI4MjEyNTI2WjBcMQswCQYDVQQGEwJERTETMBEGA1UECBMKU29tZS1T
++dGF0ZTEhMB8GA1UEChMYSW50ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMRUwEwYDVQQD
++EwxTdnlhdG9zbGF2IEgwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDb
++i4kL71TqNRi0F5RjDVejPlnN1aiFtruvWiuvppcPjY9SNw6WaTfJS356yWBrorU6
++qZbqS0l5vl+CcMrm94F2gbTZamsHaUz7puGMLx3R/s3vvYSD8pPwzqhyLY+mSSK+
++cbhvthJMa4FJLFyHKlHj7l1wn8qeAr2ceKVF4w5SjwGl9hwSHA68TMeb9dWO87N7
++82p+D9fqU3I33Qf0ieiBiRYrEBHQtDwCMJNktNmmG9GyKyu8PVs2jhvJkNsga/Le
++y+0FPwRgKA0MgnKavliGxST76Sl98pimc9h+ZyedwXw2z+lk1Fh+qhuDBWaTgIJl
++C+yLqa+TAYqimUdUYSuvAgMBAAEwDQYJKoZIhvcNAQEFBQADggEBAHI5T9gdsFh1
++X4g7eQVXBEyW11mpsqUh/Kl4PI/8xSzeon9DQcNc+oQJDAvtOoQXww1sYKUykmwr
++H7idjx6fMyygeUsvRy7clDBfdG+GR43QPkJSZT61ZGhZUbKKOPoAMnomNe2uL4LW
++4iU/1bkEQNKzV0iea663t3t5rr++lE2Ulm0LIDLgxlmuyvl/6e8kgRk/ojj/ZhIh
++IjEZjWwAJDRxGz7Kc19keecUtIE/fBZrkC+qRivnfqEuXH/MW7a18uYYtG25yFQp
++UJHQ0wBayhY9NKkcgVAABMdiNtKJIXdrkeKBKDSnuX7GErwy23adjZ5wFjxefm7P
++jjazBHHW1qc=
++-----END CERTIFICATE-----
