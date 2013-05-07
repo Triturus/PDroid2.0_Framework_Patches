@@ -22,6 +22,13 @@ I'm also looking forward for an better way how to apply the patches. Until now I
 	. build/envsetup.sh 
     brunch <YOUR_DEVICE>
 
+**IMPORTANT**
+If you have previous patches applied (e.g. v1.54) you have to delete the folder
+
+    packages/apps/Settings
+    
+**before** you sync your reop!
+
 ### Remove The Patches
 You can remove the Patches with following commands (also same way like mateo handles it):
 
