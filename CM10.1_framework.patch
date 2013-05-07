@@ -1122,7 +1122,7 @@ diff -rupN '--exclude=.svn' '--exclude=.git*' '--exclude=*.java~' '--exclude=*.m
  
 diff -rupN '--exclude=.svn' '--exclude=.git*' '--exclude=*.java~' '--exclude=*.mk~' '--exclude=*.orig~' '--exclude=*.txt' '--exclude=*.orig' '--exclude=*.rej' '--exclude=*.latest' '--exclude=*.txt~' '--exclude=*.xml~' '--exclude=*xml.orig~' '--exclude=*.xml.orig' '--exclude=*.patch~' '--exclude=*.patch' '--exclude=*.diff~' '--exclude=*.diff~' '--exclude=*.aidl~' '--exclude=*.xml~' '--exclude=*.latest' '--exclude=*.latest~' '--exclude=*~' /media/ROM-Speicher/CM10.1/frameworks/base/core/java/android/provider/Settings.java pang/frameworks/base/core/java/android/provider/Settings.java
 --- /media/ROM-Speicher/CM10.1/frameworks/base/core/java/android/provider/Settings.java	2013-05-03 11:50:59.577768643 +0545
-+++ pang/frameworks/base/core/java/android/provider/Settings.java	2013-05-03 21:41:57.777818967 +0545
++++ pang/frameworks/base/core/java/android/provider/Settings.java	2013-05-08 00:42:27.947582238 +0545
 @@ -16,6 +16,16 @@
  
  package android.provider;
@@ -1140,11 +1140,27 @@ diff -rupN '--exclude=.svn' '--exclude=.git*' '--exclude=*.java~' '--exclude=*.m
  import android.annotation.SdkConstant;
  import android.annotation.SdkConstant.SdkConstantType;
  import android.app.SearchManager;
-@@ -972,6 +982,67 @@ public final class Settings {
+@@ -972,6 +982,8 @@ public final class Settings {
              MOVED_TO_GLOBAL.add(Settings.Global.SHOW_PROCESSES);
              MOVED_TO_GLOBAL.add(Settings.Global.ALWAYS_FINISH_ACTIVITIES);
          }
 +        
++
+ 
+         /** @hide */
+         public static void getMovedKeys(HashSet<String> outKeySet) {
+@@ -997,6 +1009,7 @@ public final class Settings {
+         /** @hide */
+         public static String getStringForUser(ContentResolver resolver, String name,
+                 int userHandle) {
++        	
+             if (MOVED_TO_SECURE.contains(name)) {
+                 Log.w(TAG, "Setting " + name + " has moved from android.provider.Settings.System"
+                         + " to android.provider.Settings.Secure, returning read-only value.");
+@@ -3600,6 +3613,67 @@ public final class Settings {
+             MOVED_TO_GLOBAL.add(Settings.Global.PREFERRED_CDMA_SUBSCRIPTION);
+         }
+ 
 +        
 +		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 +		//BEGIN PRIVACY 
@@ -1205,17 +1221,18 @@ diff -rupN '--exclude=.svn' '--exclude=.git*' '--exclude=*.java~' '--exclude=*.m
 +		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 +        
 +        
- 
++        
          /** @hide */
          public static void getMovedKeys(HashSet<String> outKeySet) {
-@@ -997,6 +1068,66 @@ public final class Settings {
+             outKeySet.addAll(MOVED_TO_GLOBAL);
+@@ -3618,6 +3692,67 @@ public final class Settings {
          /** @hide */
          public static String getStringForUser(ContentResolver resolver, String name,
                  int userHandle) {
 +        	
 +			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 +			//BEGIN PRIVACY
-+			if(name.equals(Secure.ANDROID_ID)){ //normally it should work with sNameValueCache.getString instead of sLockSettings
++			if (name.equals(Secure.ANDROID_ID)) { //normally it should work with sNameValueCache.getString instead of sLockSettings
 +				initiate();
 +				try{
 +					PrivacyDebugger.i(PRIVACY_TAG, "getString - entry");
@@ -1272,9 +1289,10 @@ diff -rupN '--exclude=.svn' '--exclude=.git*' '--exclude=*.java~' '--exclude=*.m
 +			//END PRIVACY
 +			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 +
-             if (MOVED_TO_SECURE.contains(name)) {
-                 Log.w(TAG, "Setting " + name + " has moved from android.provider.Settings.System"
-                         + " to android.provider.Settings.Secure, returning read-only value.");
++        	
+             if (MOVED_TO_GLOBAL.contains(name)) {
+                 Log.w(TAG, "Setting " + name + " has moved from android.provider.Settings.Secure"
+                         + " to android.provider.Settings.Global.");
 diff -rupN '--exclude=.svn' '--exclude=.git*' '--exclude=*.java~' '--exclude=*.mk~' '--exclude=*.orig~' '--exclude=*.txt' '--exclude=*.orig' '--exclude=*.rej' '--exclude=*.latest' '--exclude=*.txt~' '--exclude=*.xml~' '--exclude=*xml.orig~' '--exclude=*.xml.orig' '--exclude=*.patch~' '--exclude=*.patch' '--exclude=*.diff~' '--exclude=*.diff~' '--exclude=*.aidl~' '--exclude=*.xml~' '--exclude=*.latest' '--exclude=*.latest~' '--exclude=*~' /media/ROM-Speicher/CM10.1/frameworks/base/core/java/android/speech/srec/MicrophoneInputStream.java pang/frameworks/base/core/java/android/speech/srec/MicrophoneInputStream.java
 --- /media/ROM-Speicher/CM10.1/frameworks/base/core/java/android/speech/srec/MicrophoneInputStream.java	2013-04-02 21:48:00.461500497 +0545
 +++ pang/frameworks/base/core/java/android/speech/srec/MicrophoneInputStream.java	2013-02-05 00:01:17.888311485 +0545
@@ -7191,7 +7209,7 @@ diff -rupN '--exclude=.svn' '--exclude=.git*' '--exclude=*.java~' '--exclude=*.m
 +}
 diff -rupN '--exclude=.svn' '--exclude=.git*' '--exclude=*.java~' '--exclude=*.mk~' '--exclude=*.orig~' '--exclude=*.txt' '--exclude=*.orig' '--exclude=*.rej' '--exclude=*.latest' '--exclude=*.txt~' '--exclude=*.xml~' '--exclude=*xml.orig~' '--exclude=*.xml.orig' '--exclude=*.patch~' '--exclude=*.patch' '--exclude=*.diff~' '--exclude=*.diff~' '--exclude=*.aidl~' '--exclude=*.xml~' '--exclude=*.latest' '--exclude=*.latest~' '--exclude=*~' /media/ROM-Speicher/CM10.1/frameworks/base/privacy/java/android/privacy/surrogate/PrivacyContentResolver.java pang/frameworks/base/privacy/java/android/privacy/surrogate/PrivacyContentResolver.java
 --- /media/ROM-Speicher/CM10.1/frameworks/base/privacy/java/android/privacy/surrogate/PrivacyContentResolver.java	1970-01-01 05:30:00.000000000 +0530
-+++ pang/frameworks/base/privacy/java/android/privacy/surrogate/PrivacyContentResolver.java	2013-02-03 20:53:47.862358166 +0545
++++ pang/frameworks/base/privacy/java/android/privacy/surrogate/PrivacyContentResolver.java	2013-05-08 00:45:55.628971329 +0545
 @@ -0,0 +1,302 @@
 +package android.privacy.surrogate;
 +
@@ -7310,19 +7328,19 @@ diff -rupN '--exclude=.svn' '--exclude=.git*' '--exclude=*.java~' '--exclude=*.m
 +                        		pSetMan.notification(packageName, uid, PrivacySettings.REAL, PrivacySettings.DATA_CONTACTS, null, pSet);
 +                        }
 +                    } else {
-+                    	PrivacyDebugger.e(TAG, "pSet is NULL -> handle default deny mode!");
-+                    	switch(PrivacySettings.CURRENT_DEFAULT_DENY_MODE) {
-+                    		case PrivacySettings.DEFAULT_DENY_EMPTY:
-+                    		case PrivacySettings.DEFAULT_DENY_RANDOM:
-+                    			output = new PrivacyCursor();
-+                    			PrivacyDebugger.w(TAG,"default mode is empty or random. Set cursor to privacyCursor");
-+                    			break;
-+                    		case PrivacySettings.DEFAULT_DENY_REAL:
-+                    			//nothing here
-+                    			PrivacyDebugger.w(TAG,"default deny mode is real -> return real cursor");
-+                    			break;
-+                    	}
-+                    	pSetMan.notification(packageName, uid, PrivacySettings.ERROR, PrivacySettings.DATA_CONTACTS, null, pSet);
++                    	PrivacyDebugger.w(TAG, "pSet is NULL -> user doesn't saved an entry to database. Allow it.");
++//                    	switch(PrivacySettings.CURRENT_DEFAULT_DENY_MODE) {
++//                    		case PrivacySettings.DEFAULT_DENY_EMPTY:
++//                    		case PrivacySettings.DEFAULT_DENY_RANDOM:
++//                    			output = new PrivacyCursor();
++//                    			PrivacyDebugger.w(TAG,"default mode is empty or random. Set cursor to privacyCursor");
++//                    			break;
++//                    		case PrivacySettings.DEFAULT_DENY_REAL:
++//                    			//nothing here
++//                    			PrivacyDebugger.w(TAG,"default deny mode is real -> return real cursor");
++//                    			break;
++//                    	}
++//                    	pSetMan.notification(packageName, uid, PrivacySettings.ERROR, PrivacySettings.DATA_CONTACTS, null, pSet);
 +                    }
 +                    
 +                } else if (auth.equals(CalendarContract.AUTHORITY)) {
