@@ -4,7 +4,7 @@
 ## PDroid2.0 Official Framework Patches
 These are the patches for the official PDroid2.0 framework. The patches only contain the latest stable version. I'm currently looking for a way to distribute 'devel' patches which are for testing purpose only. If someone has good ideas, please get in touch with me.
 
-### Apply The Patches
+### Apply The Patches manually
 I'm also looking forward for an better way how to apply the patches. The **yourEnvDir** is the main source directory (e.g. it contains the framework-,build-, and libcore directory):
 
 **1. Step**	
@@ -55,6 +55,27 @@ If you have previous patches applied (e.g. v1.54) you have to delete the folder
     packages/apps/Settings
     
 **before** you sync your repo!
+
+### Apply The Patches with script
+*First: Thanks to biglsd who wrote the base of the script! *
+
+You can now easily apply the patches to your sources with a little batch script. The script will be enhanced in the future, but for now it simplifies the patching process a lot. The script removes the old patches from the sources, syncs the source code and then applies the patches again. How to use it?
+
+1. Download all patches from the branch included the AutoPatch script
+2. Put the script and the patches inside your environment directory (it contains the framework-,build-, and libcore ... directories)
+3. Open the script with an texteditor and change the directory where your sources are
+
+   > CWD="YourDirToSources"
+   
+4. Open the terminal and go to your environment directory and type
+
+   > ./AutoPatch
+    
+5. If you have any problem with **permissions denied** messages, type following
+
+   > chmod +x AutoPatch
+    
+   and try again
 
 
 ### Remove The Patches
