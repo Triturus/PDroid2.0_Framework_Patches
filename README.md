@@ -5,8 +5,10 @@
 These are the patches for the official PDroid2.0 framework. The patches only contain the latest stable version. I'm currently looking for a way to distribute 'devel' patches which are for testing purpose only. If someone has good ideas, please get in touch with me.
 
 ### Apply The Patches
-I'm also looking forward for an better way how to apply the patches. Until now I handle it the same way like mateor, so you can use this commands. The **yourEnvDir** is the main source directory (e.g. it contains the framework-,build-, and libcore directory):
-	
+I'm also looking forward for an better way how to apply the patches. The **yourEnvDir** is the main source directory (e.g. it contains the framework-,build-, and libcore directory):
+
+**1. Step**	
+
     cd ~/yourEnvDir; repo sync -j16 -f 
     //if sync hangs at 100% try following, otherwise skip this!
     // begin commands for hanging sync!
@@ -14,32 +16,64 @@ I'm also looking forward for an better way how to apply the patches. Until now I
     kill %1
     repo sync -j16 -l
     // end commands for hanging sync!
-	git checkout -b pdroid; patch -p1 < ~/JB_build.patch
-	git checkout -b pdroid; patch -p1 < ~/JB_libcore.patch
-	git checkout -b pdroid; patch -p1 < ~/JB_Mms.patch
-	git checkout -b pdroid; patch -p1 < ~/JB_frameworks_base.patch
-	git checkout -b pdroid; patch -p1 < ~/JB_frameworks_opt.patch
-	. build/envsetup.sh 
-    brunch <YOUR_DEVICE>
+	git checkout -b pdroid; patch -p1 < ~/CM10.1_build.patch
+	git checkout -b pdroid; patch -p1 < ~/CM10.1_libcore.patch
+	git checkout -b pdroid; patch -p1 < ~/CM10.1_Mms.patch
+	git checkout -b pdroid; patch -p1 < ~/CM10.1_framework.patch
+	git checkout -b pdroid; patch -p1 < ~/CM10.1_PDAgent.patch
+	
+**2. Step**
 
+Now you have to decide which **default-deny-mode** you prefer. If you don't know what it is, please read [this](http://forum.xda-developers.com/showpost.php?p=37742535&postcount=623) post at topic **hardcoded default deny mode**. You can simply change the default deny mode, by open the class **PrivacySettings.java** from package android.privacy [directory: frameworks/base/privacy/java/android/privacy/PrivacySettings.java] with a texteditor. Then change following line:
+
+    public static final int CURRENT_DEFAULT_DENY_MODE = DEFAULT_DENY_EMPTY;
+
+To the demanded cases:
+
+**REAL**
+
+    public static final int CURRENT_DEFAULT_DENY_MODE = DEFAULT_DENY_REAL;
+    
+**RANDOM**
+
+    public static final int CURRENT_DEFAULT_DENY_MODE = DEFAULT_DENY_RANDOM;
+    
+**EMPTY**
+
+    public static final int CURRENT_DEFAULT_DENY_MODE = DEFAULT_DENY_EMPTY;
+
+**3. Step**
+
+Now you can just build your sources by using following commands:
+   
+    . build/envsetup.sh 
+    brunch <YOUR_DEVICE>
+    
 **IMPORTANT**
 If you have previous patches applied (e.g. v1.54) you have to delete the folder
 
     packages/apps/Settings
     
-**before** you sync your reop!
+**before** you sync your repo!
+
 
 ### Remove The Patches
-You can remove the Patches with following commands (also same way like mateo handles it):
+You can remove the Patches with following commands:
 
-	cd ~/yourEnvDir; git checkout . ; git clean -df
-	repo abandon pdroid
+	cd yourEnvDir/build ; git checkout . ; git clean -df
+    cd yourEnvDir/libcore ; git checkout . ; git clean -df
+    cd yourEnvDir/frameworks/base ; git checkout . ; git clean -df
+    cd yourEnvDir/frameworks/opt/telephony ; git checkout . ; git clean -df
+    cd yourEnvDir/packages/apps/Mms ; git checkout . ; git clean -df
+    rm -rf yourEnvDir/packages/apps/PDroidAgent
+    cd yourEnvDir
+    repo abandon pdroid
     
 Now only clean your target directory:
 
 	make clobber && make clean
 ### Easier Way?
-If you aren't able to compile by your own, please choose [AutoPatcher](http://forum.xda-developers.com/showthread.php?t=1719408) to apply the patch to your current ROM.
+If you aren't able to compile by your own, please choose the [PDroid2.0-Flash-Repo](http://forum.xda-developers.com/showpost.php?p=32458186&postcount=2) download ready builds for your ROM and Device.
 
 ### Can I help you?
 Yes of course, I'm always in search of **Team-Members** and **contributors** for other ROMs. If you want to help me, just get in touch with me :-)
