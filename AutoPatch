@@ -1,0 +1,34 @@
+#!/bin/bash -x
+#################################
+# Written by biglsd				#
+# modified by CollegeDev		#
+#################################
+
+# EDIT the CWD to your directory where the sources are
+CWD="/mnt/CM10.1"
+
+
+# removing previous patch
+cd "$CWD/build" ; git checkout . ; git clean -df
+cd "$CWD/libcore" ; git checkout . ; git clean -df
+cd "$CWD/frameworks/base" ; git checkout . ; git clean -df
+cd "$CWD/frameworks/opt/telephony" ; git checkout . ; git clean -df
+cd "$CWD/packages/apps/Mms" ; git checkout . ; git clean -df
+rm -rf "$CWD/packages/apps/PDroidAgent"
+cd "$CWD"
+repo abandon pdroid
+
+
+# applying pdroid patch
+repo sync -j16 -f
+cd "$CWD/build"; git checkout -b pdroid;
+cd "$CWD/libcore"; git checkout -b pdroid;
+cd "$CWD/packages/apps/Mms"; git checkout -b pdroid;
+cd "$CWD/frameworks/base"; git checkout -b pdroid;
+cd "$CWD/frameworks/opt/telephony"; git checkout -b pdroid;
+cd "$CWD"
+patch -p1 < CM10.1_build.patch
+patch -p1 < CM10.1_framework.patch
+patch -p1 < CM10.1_libcore.patch
+patch -p1 < CM10.1_Mms.patch
+patch -p1 < CM10.1_PDAgent.patch 
