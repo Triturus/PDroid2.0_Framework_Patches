@@ -14,7 +14,7 @@ Make sure your environment is setup, i.e. you ran
 
 from the top of your Android source tree.
 
-Get the repository containing the framework patch. Put them outside of your source tree and run ppatch
+Get the repository containing the framework patches. Put them outside of your source tree and run ppatch
 
 	cd <somewhere-but-not-in-your-source-tree>
 	git clone git://github.com/CollegeDev/PDroid2.0_Framework_Patches.git ppatches
