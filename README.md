@@ -22,11 +22,12 @@ Get the repository containing the framework patch. Put them outside of your sour
 
 That's it.
 
-**2. For second-timers** 
+**2. For second-timers, third-timers, ...** 
 
 	cd <top-of-your-source-tree>
 	. build/envsetup.sh
 	cd <where-you-put-the-patches--i-hope-it-is-not-in-your-source-tree>
+	git pull
 	./ppatches update
 
 That's it.
