@@ -6,9 +6,12 @@ These are the patches for the official PDroid2.0 framework. The patches only con
 
 ### Applying the patches
 **1. For first-timers**
+
 Make sure your environment is setup, i.e. you ran
+
 	cd <top-of-your-source-tree>
 	. build/envsetup.sh
+
 from the top of your Android source tree.
 
 Get the repository containing the framework patch. Put them outside of your source tree and run ppatch
@@ -20,6 +23,7 @@ Get the repository containing the framework patch. Put them outside of your sour
 That's it.
 
 **2. For second-timers** 
+
 	cd <top-of-your-source-tree>
 	. build/envsetup.sh
 	cd <where-you-put-the-patches--i-hope-it-is-not-in-your-source-tree>
@@ -28,6 +32,7 @@ That's it.
 That's it.
 
 **3. For last-timers**
+
 	cd <top-of-your-source-tree>
 	. build/envsetup.sh
 	cd <are-your-sure-they-are-not-in-your-source-tree--well-now-it-does-not-matter-anymore>
