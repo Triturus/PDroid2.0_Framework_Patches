@@ -28,7 +28,7 @@ That's it.
 	. build/envsetup.sh
 	cd <where-you-put-the-patches--i-hope-it-is-not-in-your-source-tree>
 	git pull
-	./ppatches update
+	./ppatch update
 
 That's it.
 
@@ -37,7 +37,7 @@ That's it.
 	cd <top-of-your-source-tree>
 	. build/envsetup.sh
 	cd <are-your-sure-they-are-not-in-your-source-tree--well-now-it-does-not-matter-anymore>
-	./ppatches remove
+	./ppatch remove
 
 That's it.
 
