@@ -4,6 +4,44 @@
 ## PDroid2.0 Official Framework Patches
 These are the patches for the official PDroid2.0 framework. The patches only contain the latest stable version. I'm currently looking for a way to distribute 'devel' patches which are for testing purpose only. If someone has good ideas, please get in touch with me.
 
+### Applying the patches
+**1. For first-timers**
+
+Make sure your environment is setup, i.e. you ran
+
+	cd <top-of-your-source-tree>
+	. build/envsetup.sh
+
+from the top of your Android source tree.
+
+Get the repository containing the framework patches. Put them outside of your source tree and run ppatch
+
+	cd <somewhere-but-not-in-your-source-tree>
+	git clone git://github.com/CollegeDev/PDroid2.0_Framework_Patches.git ppatches
+	ppatches/ppatch install
+
+That's it.
+
+**2. For second-timers, third-timers, ...** 
+
+	cd <top-of-your-source-tree>
+	. build/envsetup.sh
+	cd <where-you-put-the-patches--i-hope-it-is-not-in-your-source-tree>
+	git pull
+	./ppatch update
+
+That's it.
+
+**3. For last-timers**
+
+	cd <top-of-your-source-tree>
+	. build/envsetup.sh
+	cd <are-your-sure-they-are-not-in-your-source-tree--well-now-it-does-not-matter-anymore>
+	./ppatch remove
+
+That's it.
+
+
 ### Apply The Patches manually
 I'm also looking forward for an better way how to apply the patches. The **yourEnvDir** is the main source directory (e.g. it contains the framework-,build-, and libcore directory):
 
@@ -56,43 +94,22 @@ If you have previous patches applied (e.g. v1.54) you have to delete the folder
     
 **before** you sync your repo!
 
-### Apply The Patches with script
-*First: Thanks to biglsd who wrote the base of the script! *
-
-You can now easily apply the patches to your sources with a little batch script. The script will be enhanced in the future, but for now it simplifies the patching process a lot. The script removes the old patches from the sources, syncs the source code and then applies the patches again. How to use it?
-
-1. Download all patches from the branch included the AutoPatch script
-2. Put the script and the patches inside your environment directory (it contains the framework-,build-, and libcore ... directories)
-3. Open the script with an texteditor and change the directory where your sources are
-
-   > CWD="YourDirToSources"
-   
-4. Open the terminal and go to your environment directory and type
-
-   > ./AutoPatch
-    
-5. If you have any problem with **permissions denied** messages, type following
-
-   > chmod +x AutoPatch
-    
-   and try again
-
-
 ### Remove The Patches
 You can remove the Patches with following commands:
 
 	cd yourEnvDir/build ; git checkout . ; git clean -df
-    cd yourEnvDir/libcore ; git checkout . ; git clean -df
-    cd yourEnvDir/frameworks/base ; git checkout . ; git clean -df
-    cd yourEnvDir/frameworks/opt/telephony ; git checkout . ; git clean -df
-    cd yourEnvDir/packages/apps/Mms ; git checkout . ; git clean -df
-    rm -rf yourEnvDir/packages/apps/PDroidAgent
-    cd yourEnvDir
-    repo abandon pdroid
+	cd yourEnvDir/libcore ; git checkout . ; git clean -df
+	cd yourEnvDir/frameworks/base ; git checkout . ; git clean -df
+	cd yourEnvDir/frameworks/opt/telephony ; git checkout . ; git clean -df
+	cd yourEnvDir/packages/apps/Mms ; git checkout . ; git clean -df
+	rm -rf yourEnvDir/packages/apps/PDroidAgent
+	cd yourEnvDir
+	repo abandon pdroid
     
 Now only clean your target directory:
 
 	make clobber && make clean
+
 ### Easier Way?
 If you aren't able to compile by your own, please choose the [PDroid2.0-Flash-Repo](http://forum.xda-developers.com/showpost.php?p=32458186&postcount=2) download ready builds for your ROM and Device.
 

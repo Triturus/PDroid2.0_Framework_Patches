@@ -1,0 +1,79 @@
+#!/bin/bash
+#########################################
+# Written by biglsd 			#
+# modified by CollegeDev & xelra	#
+#########################################
+
+# Array of subdirectories
+subdir=( "build" "libcore" "frameworks/base" "frameworks/opt/telephony" "packages/apps/Mms" )
+
+# Absolute path to this script
+SCRIPT=$(readlink -f $0)
+# Absolute path this script is in
+SCRIPTPATH=$(dirname $SCRIPT)
+
+remove()
+{
+	printf "Removing PDroid 2.0 patches ...%s"
+
+	for i in "${subdir[@]}"
+	do
+		if cd "$ANDROID_BUILD_TOP/$i" ; then
+			git checkout . && git clean -df
+		else
+			echo "$ANDROID_BUILD_TOP/$i: No such directory."
+		fi
+	done
+
+	if cd "$ANDROID_BUILD_TOP/packages/apps/PDroidAgent" ; then
+		rm -rf "$ANDROID_BUILD_TOP/packages/apps/PDroidAgent"
+	else
+		echo "$ANDROID_BUILD_TOP/packages/apps/PDroidAgent: No such directory."
+	fi
+
+	cd "$ANDROID_BUILD_TOP"
+
+	repo abandon pdroid
+}
+
+install()
+{
+	printf "Installing PDroid 2.0 patches ...%s"
+	cd "$ANDROID_BUILD_TOP"
+	repo sync
+
+	for i in "${subdir[@]}"
+	do
+		if cd "$ANDROID_BUILD_TOP/$i" ; then
+			git checkout -b pdroid
+		else
+			echo "$ANDROID_BUILD_TOP/$i: No such directory."
+		fi
+	done
+
+	cd "$ANDROID_BUILD_TOP"
+
+	patchfiles=( "CM10.1_build.patch" "CM10.1_framework.patch" "CM10.1_libcore.patch" "CM10.1_Mms.patch" "CM10.1_PDAgent.patch" )
+	for i in "${patchfiles[@]}"
+	do
+		patch -p1 < $SCRIPTPATH/$i
+	done
+}
+
+case "$1" in
+	install)
+        	install
+	;;
+	remove)
+		remove
+	;;
+	update)
+		$0 remove
+		$0 install
+	;;
+	*)
+		## If no parameters are given, print which are avaiable.
+		echo "Usage: $0 {install|remove|update}"
+		exit 1
+	;;
+esac
