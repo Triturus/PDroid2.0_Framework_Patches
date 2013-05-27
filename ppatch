@@ -56,7 +56,7 @@ install()
 	patchfiles=( "CM10.1_build.patch" "CM10.1_framework.patch" "CM10.1_libcore.patch" "CM10.1_Mms.patch" "CM10.1_PDAgent.patch" )
 	for i in "${patchfiles[@]}"
 	do
-		patch -p1 < $SCRIPTPATH/$i
+		patch -p1 --verbose < $SCRIPTPATH/$i
 	done
 }
 
